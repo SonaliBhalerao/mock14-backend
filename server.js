@@ -2,7 +2,9 @@ const express = require("express");
 const app = express();
 require("dotenv").config;
 const cors = require('cors');
-const userRoutes = require('./Routes/User.Route');
+const {quizRoutes }= require('./Routes/Quiz.route');
+const {userRoutes }= require('./Routes/User.route');
+const {QuizModel} = require('./Models/Quiz.model')
 
 
 const {connection} = require("./db.js");
@@ -15,7 +17,21 @@ app.get("/", async(req, res)=>{
     res.send("Homepage")
 });
 
-app.use("/user", userRoutes);
+// app.post("/",async(req, res)=>{
+//     console.log(req.body)
+//     const { category, type, difficulty, question, correct_answer, 
+//         incorrect_answers } = req.body;
+//     console.log(category, type, difficulty, question, correct_answer, 
+//         incorrect_answers)
+//         const quizs = new QuizModel({ category, type, difficulty, question, correct_answer, incorrect_answers })
+//         await quizs.save();
+//          res.send(quizs);
+   
+// });
+
+
+app.use("/quiz", quizRoutes);
+
 
 
 
