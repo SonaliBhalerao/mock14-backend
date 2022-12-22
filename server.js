@@ -3,9 +3,6 @@ const app = express();
 require("dotenv").config;
 const cors = require('cors');
 const {quizRoutes }= require('./Routes/Quiz.route');
-const {userRoutes }= require('./Routes/User.route');
-const {QuizModel} = require('./Models/Quiz.model')
-
 
 const {connection} = require("./db.js");
 const PORT = process.env.PORT || 8000
@@ -31,9 +28,6 @@ app.get("/", async(req, res)=>{
 
 
 app.use("/quiz", quizRoutes);
-
-
-
 
 
 app.listen(PORT, async()=>{
