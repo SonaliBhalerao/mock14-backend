@@ -5,7 +5,15 @@ const quizRoutes = express.Router();
 
 quizRoutes.get("/", async(req, res)=>{
     const {category,difficulty,amount}=req.query;
-    const data = await QuizModel.find({category:category,difficulty:difficulty}).limit(amount);
+
+    console.log(category)
+    if(category==undefined||difficulty==undefined||amount==undefined){
+        var data = await QuizModel.find();
+    }
+    else{
+    var data = await QuizModel.find({category:category,difficulty:difficulty}).limit(amount);
+    }
+    console.log(data)
     res.send(data);
 })
 
