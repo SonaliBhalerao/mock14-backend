@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 require("dotenv").config;
 const cors = require('cors');
-const {quizRoutes }= require('./Routes/Quiz.route');
 
 const {connection} = require("./db.js");
+const { userRoutes } = require("./Routes/User.Route");
+const { TicketModel } = require("./Models/Ticket.model.js");
+const { ticketRoutes } = require("./Routes/Ticket.Route.js");
 const PORT = process.env.PORT || 8000
 
 app.use(cors());
@@ -14,21 +16,8 @@ app.get("/", async(req, res)=>{
     res.send("Homepage")
 });
 
-// app.post("/",async(req, res)=>{
-//     console.log(req.body)
-//     const { category, type, difficulty, question, correct_answer, 
-//         incorrect_answers } = req.body;
-//     console.log(category, type, difficulty, question, correct_answer, 
-//         incorrect_answers)
-//         const quizs = new QuizModel({ category, type, difficulty, question, correct_answer, incorrect_answers })
-//         await quizs.save();
-//          res.send(quizs);
-   
-// });
-
-
-app.use("/quiz", quizRoutes);
-
+app.use("/user", userRoutes);
+app.use("/", ticketRoutes);
 
 app.listen(PORT, async()=>{
     try{
